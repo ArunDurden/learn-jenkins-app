@@ -41,7 +41,7 @@ pipeline {
                 echo 'Test Stage'
                 test -f "build/index.html"
                 echo $?
-                
+                npm test
                 '''
             }
         }
