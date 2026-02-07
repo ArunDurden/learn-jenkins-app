@@ -5,6 +5,8 @@ pipeline {
         stage("Without Docker"){
             steps{
                 echo 'Without Docker'
+                echo 'Printing everything on Jenkins agent'
+                sh 'ls -la'
             }
         }
         
@@ -18,7 +20,15 @@ pipeline {
             
             steps{
                 echo 'With Docker'
-                sh 'npm --version'
+                sh '''
+                echo "Printing everything on docker container before building"
+                ls -la
+                node --version
+                npm --version
+                npm ci
+                echo "Printing everything on docker container after building"
+                ls -la
+                '''
             }
         }
     }
