@@ -27,6 +27,7 @@ pipeline {
                 node --version
                 npm --version
                 npm ci
+                npm run build
                 echo "Printing everything on docker container after building"
                 ls -la
                 '''
