@@ -7,6 +7,7 @@ pipeline {
     }
     
     stages{
+        
         stage("Without Docker"){
             steps{
                 echo 'Without Docker'
@@ -119,7 +120,7 @@ pipeline {
                 '''
 
                 script{
-                    env.STAGING_URL = sh(script: "node_modules/.bin/node-jq '.deploy_url' deploy_staging.json", returnStdout: true)
+                    env.STAGING_URL = sh(script: "node_modules/.bin/node-jq -r '.deploy_url' deploy_staging.json", returnStdout: true)
                 }
             }
 
@@ -154,6 +155,18 @@ pipeline {
 
                 }
             }
+        }
+
+        stage("Approval"){
+
+            steps{
+
+                timeout(time: 5, unit: 'MINUTES') {
+                    input message: 'Do you want to approve the build deployment?', ok: 'Yes, I am sure.'
+                }
+
+            }
+
         }
 
         stage("Deploy Prod"){
@@ -211,7 +224,6 @@ pipeline {
             }
         }
           
-
     }
 
 
