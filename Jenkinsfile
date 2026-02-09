@@ -161,7 +161,7 @@ pipeline {
 
             steps{
 
-                timeout(time: 5, unit: 'MINUTES') {
+                timeout(time: 15, unit: 'MINUTES') {
                     input message: 'Do you want to approve the build deployment?', ok: 'Yes, I am sure.'
                 }
 
