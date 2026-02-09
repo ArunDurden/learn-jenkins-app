@@ -139,6 +139,7 @@ pipeline {
 
             steps{
                 sh'''
+                echo "Naal Nachna.........."
                 echo "URL_FOR_PRODUCTION_SERVER: $CI_ENVIRONMENT_URL"
                 npx playwright test --reporter=html
                 '''
